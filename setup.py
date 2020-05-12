@@ -1,22 +1,12 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from codecs import open
 from os import path
-from unittest import TestLoader
 
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
-
-fh = open("README.md")
-try:
-    try:
-        readme_content = fh.read()
-    except:
-        readme_content = ""
-finally:
-    f.close()
 
 here = path.abspath(path.dirname(__file__))
 about = {}
@@ -29,7 +19,7 @@ setup(
     name=about["__title__"],
     version=about["__version__"],
     description=about["__description__"],
-    long_description=readme_content,
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url=about["__url__"],
     author=about["__author__"],

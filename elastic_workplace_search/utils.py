@@ -2,9 +2,9 @@ import signal
 import platform
 from functools import wraps
 
-class Timeout:
 
-    def __init__(self, exception_class, seconds=1, error_message='Timeout'):
+class Timeout:
+    def __init__(self, exception_class, seconds=1, error_message="Timeout"):
         self.exception_class = exception_class
         self.seconds = seconds
         self.error_message = error_message
@@ -19,15 +19,17 @@ class Timeout:
     def __exit__(self, type, value, traceback):
         signal.alarm(0)
 
+
 def windows_incompatible(error_message=None):
-    error_message = error_message or 'This function is not supported on Windows.'
+    error_message = error_message or "This function is not supported on Windows."
 
     def decorator(f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            if platform.system() == 'Windows':
+            if platform.system() == "Windows":
                 raise OSError(error_message)
             return f(*args, **kwargs)
+
         return decorated
 
     return decorator

@@ -1,5 +1,4 @@
 class Documents:
-
     def __init__(self, session):
         self.session = session
 
@@ -28,15 +27,17 @@ class Documents:
             }
         ]
         >>> try:
-        >>>     document_results = client.documents.index_documents(content_source_key, documents)
+        >>>     document_results = client.documents.index_documents(
+        ...         content_source_key,
+        ...         documents
+        ...     )
         >>>     print(document_results)
         >>> except WorkplaceSearchError:
         >>>     # handle exception
         >>>     pass
         [{'errors': [], 'id': '1', 'id': None}]
         """
-        return self._async_create_or_update_documents(content_source_key,
-                                                          documents)
+        return self._async_create_or_update_documents(content_source_key, documents)
 
     def delete_documents(self, content_source_key, ids):
         """Destroys documents in a content source by their ids.
@@ -62,11 +63,9 @@ class Documents:
         >>>     pass
         [{"id": '1',"success": True}]
         """
-        endpoint = "sources/{}/documents/bulk_destroy".format(
-            content_source_key)
-        return self.session.request('post', endpoint, json=ids)
-
+        endpoint = "sources/{}/documents/bulk_destroy".format(content_source_key)
+        return self.session.request("post", endpoint, json=ids)
 
     def _async_create_or_update_documents(self, content_source_key, documents):
         endpoint = "sources/{}/documents/bulk_create".format(content_source_key)
-        return self.session.request('post', endpoint, json=documents)
+        return self.session.request("post", endpoint, json=documents)
